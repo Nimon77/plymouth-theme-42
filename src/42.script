@@ -4,42 +4,42 @@ Window.SetBackgroundBottomColor (0.00, 0.00, 0.00);
 screen_ratio = Window.GetHeight() / Window.GetWidth();
 
 for (i = 0; i < 54; i++)
-	monolythe_image[i] = Image("progress-" + i + ".png");
+	monolythe.image[i] = Image("progress-" + i + ".png");
 
 /* Check if screen ratio is taller than image ratio, we will match the screen height */
-monolythe_image_ratio = monolythe_image[0].GetHeight() / monolythe_image[0].GetWidth();
-if (screen_ratio > monolythe_image_ratio)
+monolythe.ratio = monolythe.image[0].GetHeight() / monolythe.image[0].GetWidth();
+if (screen_ratio > monolythe.ratio)
 {
-	scale_factor = Window.GetHeight() / monolythe_image[0].GetHeight();
+	scale_factor = Window.GetHeight() / monolythe.image[0].GetHeight();
 	for (i = 0; i < 54; i++)
-		monolythe_image[i] = monolythe_image[i].Scale(monolythe_image[i].GetWidth() * scale_factor,
-														monolythe_image[i].GetHeight() * scale_factor);
+		monolythe.image[i] = monolythe.image[i].Scale(monolythe.image[i].GetWidth() * scale_factor,
+														monolythe.image[i].GetHeight() * scale_factor);
 }
 
-campus_image = Image("campus.png");
-campus_image_ratio = campus_image.GetHeight() / campus_image.GetWidth();
-campus_image = campus_image.Scale(campus_image.GetWidth() * 0.5, campus_image.GetHeight() * 0.5);
+campus.image = Image("campus.png");
+campus.ratio = campus.image.GetHeight() / campus.image.GetWidth();
+campus.image = campus.image.Scale(campus.image.GetWidth() * 0.5, campus.image.GetHeight() * 0.5);
 
-monolythe_sprite_left = Sprite();
-monolythe_sprite_right = Sprite();
-campus_sprite = Sprite();
+monolythe.sprite.left = Sprite();
+monolythe.sprite.right = Sprite();
+campus.sprite = Sprite();
 
-campus_sprite.SetX(Window.GetWidth() / 2 - campus_image.GetWidth() / 2);
-campus_sprite.SetY(Window.GetHeight() / 4 - campus_image.GetHeight() / 2);
-campus_sprite.SetImage(campus_image);
+campus.sprite.SetX(Window.GetWidth() / 2 - campus.image.GetWidth() / 2);
+campus.sprite.SetY(Window.GetHeight() / 4 - campus.image.GetHeight() / 2);
+campus.sprite.SetImage(campus.image);
 
-monolythe_sprite_left.SetX(0); /* Place in the left */
-monolythe_sprite_left.SetY(Window.GetHeight() / 2 - monolythe_image[0].GetHeight() / 2);
+monolythe.sprite.left.SetX(0); /* Place in the left */
+monolythe.sprite.left.SetY(Window.GetHeight() / 2 - monolythe.image[0].GetHeight() / 2);
 
-monolythe_sprite_right.SetX(Window.GetWidth() - monolythe_image[0].GetWidth()); /* Place in the right */
-monolythe_sprite_right.SetY(Window.GetHeight() / 2 - monolythe_image[0].GetHeight() / 2);
+monolythe.sprite.right.SetX(Window.GetWidth() - monolythe.image[0].GetWidth()); /* Place in the right */
+monolythe.sprite.right.SetY(Window.GetHeight() / 2 - monolythe.image[0].GetHeight() / 2);
 
 progress = 0;
 
 fun refresh_callback ()
 {
-	monolythe_sprite_left.SetImage(monolythe_image[Math.Int(progress / 3) % 54]);
-	monolythe_sprite_right.SetImage(monolythe_image[Math.Int(progress / 3) % 54]);
+	monolythe.sprite.left.SetImage(monolythe.image[Math.Int(progress / 3) % 54]);
+	monolythe.sprite.right.SetImage(monolythe.image[Math.Int(progress / 3) % 54]);
 	progress++;
 }
 
