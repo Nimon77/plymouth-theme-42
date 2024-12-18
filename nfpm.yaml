@@ -1,0 +1,30 @@
+# This is an example nfpm configuration file.
+# Make sure to check the documentation at https://nfpm.goreleaser.com
+#
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://nfpm.goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+name: "plymouth-theme-42"
+arch: "amd64"
+platform: "linux"
+version: "1.0.0"
+priority: "extra"
+depends:
+  - plymouth
+  - plymouth-label
+maintainer: "Nicolas Simon <contact@nimon.fr>"
+description: |
+  A plymouth theme for 42 school
+vendor: "Nimon"
+homepage: "https://github.com/Nimon77/plymouth-theme-42"
+license: "MIT"
+contents:
+  - src: ./src
+    dst: /usr/share/plymouth/themes/42
+overrides:
+  deb:
+    scripts:
+      postinstall: install_deb.sh
+      preremove: remove_deb.sh
